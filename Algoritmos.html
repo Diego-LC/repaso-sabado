@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Repaso Algoritmos</title>
+</head>
+<body>
+<h2>Acá vamos a probar algunas funciones</h2>
+<script>
+    var arr = [20, 5.3, 8, -12, 72];
+    
+    function estadisticas(arr) {
+
+        var min = arr[0];
+        var max = arr[0];
+        var suma = 0;
+
+        for (var i = 0; i < arr.length; i++) {
+            if (min > arr[i]) {
+                min = arr[i];
+            }
+            if (max < arr[i]) {
+                max = arr[i];
+            }
+            suma = suma + arr[i];
+        }
+        var prom = suma / arr.length;
+
+        return [min, prom, max]
+    }
+    function batman() {
+        var str = '';  // este string no aporta nada
+        for (var i=0; i<8; ++i) {
+            str = str + 'nana ';
+        }
+        console.log(str);
+        console.log('BATMAN!!!!');
+    }
+
+    // función que itere desde el 3000 hasta el 100 de 3 en 3
+    function cuentaAtras(){
+        for (var i=3000; i>=100; i=-3){
+            console.log(i)
+        }
+    }
+</script>
+</body>
+</html>
