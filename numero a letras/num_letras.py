@@ -6,10 +6,10 @@ def numPalabras(num):
                 'seis', 'siete', 'ocho', 'nueve', 'diez', 'once',
                 'doce', 'trece', 'catorce', 'quince']
 
-    if num <= 15:
+    if (num <= 15):
         return primeros15[num]
-
-    elif num <= 19:
+    
+    elif (num <= 19):
         unidades = num - 10
         return 'dieci' + numPalabras(unidades)
 
