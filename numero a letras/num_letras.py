@@ -1,115 +1,131 @@
 import math
 
 def numPalabras(num):
-    # Los primeros 15. acá no se sigue ningún patrón ==========================*/
-    primeros15 = ['cero', 'uno', 'dos', 'tres', 'cuatro', 'cinco',
-                'seis', 'siete', 'ocho', 'nueve', 'diez', 'once',
-                'doce', 'trece', 'catorce', 'quince']
+   # Los primeros 15. acá no se sigue ningún patrón ==========================*/
+   primeros15 = ['cero', 'uno', 'dos', 'tres', 'cuatro', 'cinco',
+               'seis', 'siete', 'ocho', 'nueve', 'diez', 'once',
+               'doce', 'trece', 'catorce', 'quince']
 
-    if (num <= 15):
-        return primeros15[num]
-    
-    elif (num <= 19):
-        unidades = num - 10
-        return 'dieci' + numPalabras(unidades)
+   if (num <= 15):
+      return primeros15[num]
 
-    elif num == 20: 
-        return 'veinte'
+   elif (num <= 19):
+      unidades = num - 10
+      return 'dieci' + numPalabras(unidades)
 
-    elif num <= 29:         # Estos son los veinti "algo"
-        unidades = num - 20
-        return 'veinti' + numPalabras(unidades)
+   elif num == 20: 
+      return 'veinte'
 
-    #  Estos van desde el 30 al 100 
-    elif num <= 100:      
-        decenas = num / 10
-        decenas = math.floor(decenas)
-    
-        unidades = num - (decenas * 10)
+   elif num <= 29:         # Estos son los veinti "algo"
+      unidades = num - 20
+      return 'veinti' + numPalabras(unidades)
 
-        nombreDecenas = ['treinta', 'cuarenta', 'cincuenta',
+   #  Estos van desde el 30 al 100 
+   elif num <= 100:      
+      decenas = num / 10
+      decenas = math.floor(decenas)
+   
+      unidades = num - (decenas * 10)
+
+      nombreDecenas = ['treinta', 'cuarenta', 'cincuenta',
                         'sesenta', 'setenta', 'ochenta', 'noventa', 'cien']
 
-        if unidades == 0:
+      if unidades == 0:
             return nombreDecenas[decenas - 3] 
 
-        return nombreDecenas[decenas - 3] +' y ' +  numPalabras(unidades)
+      return nombreDecenas[decenas - 3] +' y ' +  numPalabras(unidades)
 
-    #  Estos van del 101, 999
-    elif num <= 1000:
-        centenas = num / 100
-        centenas = math.floor(centenas)
+   #  Estos van del 101, 999
+   elif num <= 1000:
+      centenas = num / 100
+      centenas = math.floor(centenas)
 
-        resto = num - (centenas * 100)
+      resto = num - (centenas * 100)
 
-        nombreCentenas = ['ciento ', 'doscientos ', 'trescientos ', 'cuatrocientos ',
+      nombreCentenas = ['ciento ', 'doscientos ', 'trescientos ', 'cuatrocientos ',
                         'quinientos ', 'seiscientos ', 'setecientos ', 'ochocientos ',
                         'novecientos ', 'mil ']
 
-        if resto == 0:
+      if resto == 0:
             return nombreCentenas[centenas - 1]
 
-        return nombreCentenas[centenas - 1] + numPalabras(resto)
+      return nombreCentenas[centenas - 1] + numPalabras(resto)
 
-    # Estos van desde el 1001 hasta el 1999
-    elif num < 2000: 
-        resto = num - 1000
-        return 'mil ' + numPalabras(resto)
+   # Estos van desde el 1001 hasta el 1999
+   elif num < 2000: 
+      resto = num - 1000
+      return 'mil ' + numPalabras(resto)
 
-    #  Estos van desde el 2000 hasta el 999999
-    elif num < 1000000: 
-        miles = num / 1000
-        miles = math.floor(miles)
+   #  Estos van desde el 2000 hasta el 999999
+   elif num < 1000000: 
+      miles = num / 1000
+      miles = math.floor(miles)
 
-        resto = num - (miles * 1000)
+      resto = num - (miles * 1000)
 
-        if resto == 0:
+      if resto == 0:
             return numPalabras(miles) + ' mil '
 
-        return numPalabras(miles) + ' mil ' + numPalabras(resto)
+      return numPalabras(miles) + ' mil ' + numPalabras(resto)
 
-    #  Estos van desde el 1000000 hasta el 999999999999
-    elif num < 1000000000000:
-        if num == 1000000:
+   #  Estos van desde el 1000000 (1 millon) hasta el 999999999999 (999 999 ~millones)
+   elif num < 1000000000000:
+      if num == 1000000:
             return 'un millón '
-        millon = math.floor(num / 1000000)
-        resto2 = num - (millon * 1000000)
-        # console.log('millón: '+ millon, 'resto2: '+resto2);
-        if millon == 1:
+      millon = math.floor(num / 1000000)
+      resto2 = num - (millon * 1000000)
+      # console.log('millón: '+ millon, 'resto2: '+resto2);
+      if millon == 1:
             if millon != 1 and resto2 == 0:
-                return numPalabras(millon) + ' millones '
+               return numPalabras(millon) + ' millones '
 
             return 'un millón ' + numPalabras(resto2)
+      return numPalabras(millon) + ' millones, ' + numPalabras(resto2)
 
-        return numPalabras(millon) + ' millones, ' + numPalabras(resto2);
+   #Estos van desde el 1 billón hasta el trillón - 1 (10^18)
+   # errores con:
+   #numeros > 999999999999999990
+   elif num < 999999999999999999:
+      billon = math.floor(num / 1000000000000)
+      resto3 = num - (billon * 1000000000000)
+      # console.log('billón: '+ billon, 'resto3: '+resto3)
+      if (billon == 1 or resto3 == 0):
+         if (billon == 1 and resto3 == 0):
+            return 'un billón '
 
-    
-    return "no implementado"
+         if (billon != 1 and resto3 == 0):
+            return numPalabras(billon) + ' billones '
+
+         return 'un billón, ' + numPalabras(resto3)
+
+      return numPalabras(billon) + ' billones, ' + numPalabras(resto3)
+
+   return "no implementado"
 
 def iniciar():
-    print("llegamos")
-    while True:
-        # solicitamos al usuario que ingrese un numero
-        num = input("ingrese un número (o 'q' para salir): ")
-        if num == 'q':
+   print("llegamos")
+   while True:
+      # solicitamos al usuario que ingrese un numero
+      num = input("ingrese un número (o 'q' para salir): ")
+      if num == 'q':
             break
 
-        # transformar el valor a numero
-        try:
+      # transformar el valor a numero
+      try:
             num = int(num)
-        except ValueError:
+      except ValueError:
             print("valor no válido")
             continue
 
-        # transforma el numero a palabras
-        palabras = numPalabras(num)
+      # transforma el numero a palabras
+      palabras = numPalabras(num)
 
-        # finalmente imprimimos el valor 
-        print(palabras)
+      # finalmente imprimimos el valor 
+      print(palabras)
 
-    print("gracias por participar")
+   print("gracias por participar")
 
 
 if __name__ == "__main__":
-    iniciar()
+   iniciar()
 
